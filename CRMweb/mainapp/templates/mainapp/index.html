@@ -1,0 +1,72 @@
+{% extends 'layouts/layouts.html'%}
+{% load static %}
+
+{% block title %}Inicio {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <img src="{% static 'images/imgheader.svg'%}"/>
+        <h1 class="title">Inicio </h1>
+            <div class="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+        <h3 id="h3header">Bienvendo al sistema CRM de IPC2</h3>
+    </div>
+</div>
+<!--Contenido de la pagina del indice.-->
+<div class="content">
+    <h2>Usuarios</h2>
+    <div class="box">
+        <p>Este módulo permitirá crear usuarios del sistema. Estos usuarios serán los que utilizará
+        el personal de ventas. Se deberá contar como mínimo: nombres, apellidos, nombre de
+        usuario, contraseña, correo electrónico, teléfono.</p>
+    </div>
+</div>
+<div class="content2">
+    <div class="box">
+        <p>Este módulo permitirá registrar nuevas empresas.</p>
+    </div>
+    <h2>Empresas</h2>
+</div>
+<div class="content">
+    <h2>Contacto</h2>
+    <div class="box">
+        <p>Este módulo permitirá registrar nuevos contactos.</p>
+    </div>
+</div>
+<div class="content2">
+    <div class="box">
+        <p>El CRM tiene la capacidad de registrar productos que podrán ser ofertados por
+        una empresa.</p>
+    </div>
+    <h2>Productos</h2>
+</div>
+<div class="content">
+    <h2>Oportunidades de negocio (Deals)</h2>
+    <div class="box">
+        <p>Las oportunidades de negocio o “deals” en inglés, son posibles negocios que se podrán
+        registrar. Los Deals vinculan un contacto existente, una compañía y los productos.</p>
+    </div>
+</div>
+<div class="content2">
+    <div class="box">
+        <p>Este módulo permitirá crear tareas asignadas a una persona de ventas.</p>
+    </div>
+    <h2>Tareas</h2>
+</div>
+<div class="content">
+    <h2>Eventos</h2>
+    <div class="box">
+        <p>En este módulo se podrán crear nuevos eventos en los que participará el vendedor.</p>
+    </div>
+</div>
+<div id="waveindex">
+    <img src="{% static 'images/imgindex.svg'%}"/>
+</div>
+
+
+{% endblock %}

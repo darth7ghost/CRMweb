@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+        | CRM
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+</head>
+<body>
+    <header>
+        <h1>Sistema CRM</h1>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <!--<li><a href="#">Usuarios</a></li>
+                <li><a href="#">Empresas</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Deals</a></li>-->
+                <li><a href="#">Tareas</a></li>
+                <li><a href="#">Eventos</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a class="logbtn" href="#"><button>Regístrate</button></a>
+            <a class="logbtn" href="#"><button>Inicia sesión</button></a>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        Sistema CRM &copy; Oscar Sierra
+    </footer>
+</body>
+</html>

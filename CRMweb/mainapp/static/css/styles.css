@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+/* --- ALL --- */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+
+/* --- LAYOUT --- */
+body {
+    box-sizing: border-box;
+    background-color: #11131b;
+}
+
+li, a, button { 
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background-color: #40407a;
+    box-shadow: 0px 5px 5px #706fd3;
+}
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover{
+    color: #706fd3;
+}
+
+footer {
+    background-color: #40407a;
+    padding: 10px;
+    text-align: center;
+}
+
+.logbtn {
+    padding: 9px 25px;
+    background-color: #706fd3;
+    border: inset;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.logbtn:hover {
+    background-color: #11131b;
+    border-radius: 5px;
+}
+
+
+/* --- LAYOUT CONTENT --- */
+.start {
+    width: 90%;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.box {
+    display: block;
+    width: 40%;
+    border-radius: 10px;
+    background-color: #3a3f50;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.box p{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+/* --- TEMPLATES CONTENT --- */
+.initial {
+    display: flex;
+    justify-content: space-between;
+}
+
+.time {
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-size: 62px;
+}
+
+
+/* --- INDEX --- */
+#waveindex {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+    padding: none;
+    margin: 0px;
+}
+
+#h3header {
+    margin-left: 100px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    justify-content: flex-start;
+}
+
+.content2 {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    justify-content: flex-end;
+}
