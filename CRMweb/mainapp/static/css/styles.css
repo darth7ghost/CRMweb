@@ -24,13 +24,28 @@ li, a, button {
     background-color: transparent;
 }
 
+input {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    color: #11131b;
+    margin: 5px;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 10px 5%;
     background-color: #40407a;
     box-shadow: 0px 5px 5px #706fd3;
+}
+
+#h1header {
+    margin-right: auto;
 }
 
 .nav_links {
@@ -81,13 +96,13 @@ footer {
 
 .box {
     display: block;
-    width: 40%;
+    width: 60%;
     border-radius: 10px;
     background-color: #3a3f50;
     margin-left: 20px;
     margin-right: 20px;
     padding: 20px;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .box p{
@@ -140,4 +155,48 @@ footer {
     width: 90%;
     margin: auto;
     justify-content: flex-end;
+}
+
+
+/* --- LEAD LIST --- */
+.list_content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: #3a3f50;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#backbtn {
+    margin-top: 20px;
+    padding: 9px 20px;
+    background-color: #706fd3;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#backbtn:hover {
+    background-color: #11131b;
+    border-radius: 5px;
+}
+
+
+/* --- LEAD CREATE --- */
+.submitbtn {
+    margin-top: 20px;
+    padding: 9px 20px;
+    background-color: #10ac84;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.submitbtn:hover {
+    background-color: #11131b;
+    border-radius: 5px;
 }

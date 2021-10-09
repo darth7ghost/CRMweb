@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <h1>Sistema CRM</h1>
+        <h1 id="h1header">Sistema CRM</h1>
         <nav>
             <ul class="nav_links">
                 <li><a href="{% url 'index' %}">Inicio</a></li>
@@ -24,7 +24,7 @@
                 <li><a href="#">Contacto</a></li>
                 <li><a href="#">Productos</a></li>
                 <li><a href="#">Deals</a></li>-->
-                <li><a href="#">Tareas</a></li>
+                <li><a href="{% url 'lead_list' %}">Contactos</a></li>
                 <li><a href="#">Eventos</a></li>
             </ul>
         </nav>

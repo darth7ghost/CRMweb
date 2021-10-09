@@ -1,0 +1,24 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Contactos {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Estos son todos nuestros contactos: </h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+        <p></p>
+    </div>
+</div>
+{% for contacto in contactos %}
+    <div class="list_content">
+        <a href="/contactos/{{ contacto.pk }}/">{{ contacto.nombres }} {{ contacto.apellidos }}</a>
+    </div>
+{% endfor %}
+    
+{% endblock %}

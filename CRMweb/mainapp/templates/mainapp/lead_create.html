@@ -1,0 +1,28 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Base de datos {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Crea un nuevo contacto</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="box">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="submitbtn" type="submit">Crear</button>    
+        </form>
+    </div>
+    <a id="backbtn" href="/contactos/"><button>Regersar</button></a>
+</div>
+
+{% endblock %}

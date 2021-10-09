@@ -1,4 +1,4 @@
-{% extends 'layouts.html'%}
+{% extends 'layouts/layouts.html'%}
 
 {% block title %}Base de datos {% endblock %}
 
@@ -7,18 +7,20 @@
 
 <div class="start">
     <div class="initial">
-        <h1 class="title">Base de datos </h1>
+        <h1>Detalles de {{ contacto.nombres }} {{ contacto.apellidos }}</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
         </div>
-        <p>Bienvendo al sistema de facturacion de la Supertienda "La Cobanerita"</p>
     </div>
-</div?
+</div>
 <div class="content">
     <div class="box">
-        
+        <p>Nombres: {{ contacto.nombres }}
+        <br/>
+        Apellidos: {{ contacto.apellidos }}</p>
     </div>
+    <a id="backbtn" href="/contactos/"><button>Regersar</button></a>
 </div>
 
 {% endblock %}
