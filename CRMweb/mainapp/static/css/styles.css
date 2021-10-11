@@ -24,7 +24,7 @@ li, a, button {
     background-color: transparent;
 }
 
-input {
+input, select, option {
     font-weight: 500;
     font-size: 16px;
     text-decoration: none;
@@ -171,8 +171,10 @@ footer {
     border-radius: 10px;
 }
 
-#backbtn {
-    margin-top: 20px;
+.backbtn {
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     padding: 9px 20px;
     background-color: #706fd3;
     border-radius: 10px;
@@ -180,7 +182,23 @@ footer {
     transition: all 0.3s ease 0s;
 }
 
-#backbtn:hover {
+.backbtn:hover {
+    background-color: #11131b;
+    border-radius: 5px;
+}
+
+.delbtn {
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    padding: 9px 20px;
+    background-color: #c0392b;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.delbtn:hover {
     background-color: #11131b;
     border-radius: 5px;
 }

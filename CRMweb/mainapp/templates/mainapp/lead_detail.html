@@ -18,9 +18,14 @@
     <div class="box">
         <p>Nombres: {{ contacto.nombres }}
         <br/>
-        Apellidos: {{ contacto.apellidos }}</p>
+        Apellidos: {{ contacto.apellidos }}
+        <br/>
+        Agente asignado: {{ contacto.agente }}
+        <br/><br/></p>
+        <a class="submitbtn" href="/contactos/{{ contacto.pk }}/editarcontacto"><button>Editar</button></a>
+        <a class="delbtn" href="/contactos/{{ contacto.pk }}/eliminarcontacto"><button>Eliminar</button></a>
     </div>
-    <a id="backbtn" href="/contactos/"><button>Regersar</button></a>
+    <a class="backbtn" href="/contactos/"><button>Regresar</button></a>
 </div>
 
 {% endblock %}

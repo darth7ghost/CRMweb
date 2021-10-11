@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Lead, Agent
-from .forms import LeadForm
+from .forms import LeadForm, LeadModelForm
 
 # Create your views here.
 def index(request):
@@ -22,21 +22,13 @@ def lead_detail(request, pk):
 
 def lead_create(request):
 
-    form = LeadForm()
+    form = LeadModelForm()
     if request.method == "POST":
         print('Recibiendo un post request')
-        form = LeadForm(request.POST)
+        form = LeadModelForm(request.POST)
         if form.is_valid():
             print("El form es válido.")
-            print(form.cleaned_data)
-            nombres = form.cleaned_data['nombres']
-            apellidos = form.cleaned_data['apellidos']
-            agente = Agent.objects.first()
-            Lead.objects.create(
-                nombres = nombres,
-                apellidos = apellidos,
-                agente = agente
-            )
+            form.save()
             print("El contacto ha sido creado.")
             return redirect("/contactos")
 
@@ -44,3 +36,27 @@ def lead_create(request):
         "form": form
     }
     return render(request, 'mainapp/lead_create.html', context)
+
+
+def lead_update(request, pk):
+    contacto = Lead.objects.get(id=pk)
+    form = LeadModelForm(instance=contacto)
+    if request.method == "POST":
+        print('Recibiendo un post request')
+        form = LeadModelForm(request.POST, instance=contacto)
+        if form.is_valid():
+            print("El form es válido.")
+            form.save()
+            print("El contacto ha sido creado.")
+            return redirect("/contactos")
+    context = {
+        "form": form,
+        "contacto": contacto
+    }
+    return render(request, 'mainapp/lead_update.html', context)
+
+
+def lead_delete(request, pk):
+    contacto = Lead.objects.get(id=pk)
+    contacto.delete()
+    return redirect("/contactos")

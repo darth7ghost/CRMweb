@@ -7,7 +7,7 @@
 
 <div class="start">
     <div class="initial">
-        <h1>Crea un nuevo contacto</h1>
+        <h1>Edita el contacto {{ contacto.nombres }} {{ contacto.apellidos }}</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -19,7 +19,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="submitbtn" type="submit">Crear</button>    
+            <button class="submitbtn" type="submit">Actualizar</button>    
         </form>
     </div>
     <a class="backbtn" href="/contactos/"><button>Regersar</button></a>
