@@ -8,12 +8,12 @@ class User(AbstractUser):
 class Lead(models.Model):
     nombres = models.CharField(max_length=45)
     apellidos = models.CharField(max_length=45)
-    #titulo = models.CharField(max_length=45)
-    #email = models.CharField(max_length=45)
-    #compania = models.CharField(max_length=45)
-    #movil = models.CharField()
-    #telefono = models.CharField(max_length=45)
-    #descripcion = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=45)
+    email = models.CharField(max_length=45)
+    compania = models.CharField(max_length=45)
+    movil = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=45)
+    descripcion = models.CharField(max_length=200)
     agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
 
     def __str__(self):

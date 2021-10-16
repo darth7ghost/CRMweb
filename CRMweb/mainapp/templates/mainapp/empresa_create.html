@@ -1,13 +1,13 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Contactos {% endblock %}
+{% block title %}Empresas {% endblock %}
 
 {% block content %}
 {{ block.super }}
 
 <div class="start">
     <div class="initial">
-        <h1>Crea un nuevo contacto</h1>
+        <h1>Crea una nueva empresa</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -22,7 +22,7 @@
             <button class="submitbtn" type="submit">Crear</button>    
         </form>
     </div>
-    <a class="backbtn" href="{% url 'lead_list' %}"><button>Regersar</button></a>
+    <a class="backbtn" href="{% url 'empresa_list' %}"><button>Regersar</button></a>
 </div>
 
 {% endblock %}

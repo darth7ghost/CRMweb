@@ -1,0 +1,43 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Empresas {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Detalles de {{ empresas.nombre }}</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="box">
+        <p>Nombre: {{ empresas.nombre }}
+        <br/>
+        Teléfono: {{ empresas.telefono }}
+        <br/>
+        Website: {{ empresas.website }}
+        <br/>
+        Descripción: {{ empresas.descripcion }}
+        <br/>
+        Calle de facturación: {{ empresas.calleFacturacion }}
+        <br/>
+        Ciudad de facturación: {{ empresas.ciudadFacturacion }}
+        <br/>
+        Estado de facturación: {{ empresas.estadoFacturacion }}
+        <br/>
+        País de facturación: {{ empresas.paisFacturacion }}
+        <br/>
+        Código de facturación: {{ empresas.codigoFacturacion }}
+        <br/><br/></p>
+        <a class="submitbtn" href="{% url 'empresa_update' empresas.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'empresa_delete' empresas.pk %}"><button>Eliminar</button></a>
+    </div>
+    <a class="backbtn" href="{% url 'empresa_list' %}"><button>Regresar</button></a>
+</div>
+
+{% endblock %}

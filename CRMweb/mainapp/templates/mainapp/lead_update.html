@@ -1,6 +1,6 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Base de datos {% endblock %}
+{% block title %}Contactos {% endblock %}
 
 {% block content %}
 {{ block.super }}
@@ -22,7 +22,7 @@
             <button class="submitbtn" type="submit">Actualizar</button>    
         </form>
     </div>
-    <a class="backbtn" href="/contactos/"><button>Regersar</button></a>
+    <a class="backbtn" href="{% url 'lead_detail' contacto.pk %}"><button>Regersar</button></a>
 </div>
 
 {% endblock %}

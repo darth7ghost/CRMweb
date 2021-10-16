@@ -1,13 +1,13 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Contactos {% endblock %}
+{% block title %}Empresas {% endblock %}
 
 {% block content %}
 {{ block.super }}
 
 <div class="start">
     <div class="initial">
-        <h1>Crea un nuevo contacto</h1>
+        <h1>Edita la empresa {{ empresas.nombre }}</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -19,10 +19,10 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="submitbtn" type="submit">Crear</button>    
+            <button class="submitbtn" type="submit">Actualizar</button>    
         </form>
     </div>
-    <a class="backbtn" href="{% url 'lead_list' %}"><button>Regersar</button></a>
+    <a class="backbtn" href="{% url 'empresa_detail' empresas.pk %}"><button>Regersar</button></a>
 </div>
 
 {% endblock %}

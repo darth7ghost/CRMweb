@@ -1,6 +1,6 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Base de datos {% endblock %}
+{% block title %}Contactos {% endblock %}
 
 {% block content %}
 {{ block.super }}
@@ -20,12 +20,24 @@
         <br/>
         Apellidos: {{ contacto.apellidos }}
         <br/>
+        Título: {{ contacto.titulo }}
+        <br/>
+        e-mail: {{ contacto.email }}
+        <br/>
+        Compañía: {{ contacto.compania }}
+        <br/>
+        Móvil: {{ contacto.movil }}
+        <br/>
+        Teléfono: {{ contacto.telefono }}
+        <br/>
+        Descripción: {{ contacto.descripcion }}
+        <br/>
         Agente asignado: {{ contacto.agente }}
         <br/><br/></p>
-        <a class="submitbtn" href="/contactos/{{ contacto.pk }}/editarcontacto"><button>Editar</button></a>
-        <a class="delbtn" href="/contactos/{{ contacto.pk }}/eliminarcontacto"><button>Eliminar</button></a>
+        <a class="submitbtn" href="{% url 'lead_update' contacto.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'lead_delete' contacto.pk %}"><button>Eliminar</button></a>
     </div>
-    <a class="backbtn" href="/contactos/"><button>Regresar</button></a>
+    <a class="backbtn" href="{% url 'lead_list' %}"><button>Regresar</button></a>
 </div>
 
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Contactos {% endblock %}
+{% block title %}Empresas {% endblock %}
 
 {% block content %}
 {{ block.super }}
 
 <div class="start">
     <div class="initial">
-        <h1>Estos son todos nuestros contactos: </h1>
+        <h1>Estas son todas nuestras empresas: </h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -16,11 +16,11 @@
     </div>
 </div>
 <br/>
-<a class="backbtn" href="{% url 'lead_create' %}"><button>Agregar</button></a>
+<a class="backbtn" href="{% url 'empresa_create' %}"><button>Agregar</button></a>
 <br/><br/>
-{% for contacto in contactos %}
+{% for empresa in empresas %}
     <div class="list_content">
-        <a href="{% url 'lead_detail' contacto.pk %}">{{ contacto.nombres }} {{ contacto.apellidos }} - {{ contacto.email }}</a>
+        <a href="{% url 'empresa_detail' empresa.pk %}">{{ empresa.nombre }} {{ empresa.telefono }}</a>
     </div>
 {% endfor %}
     
