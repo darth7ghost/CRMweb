@@ -9,23 +9,23 @@ class indexView(TemplateView):
 
 # --- VIEWS PARA CONTACTOS ---
 class leadListView(ListView):
-    template_name="mainapp/leads_list.html"
+    template_name="leads/leads_list.html"
     queryset = Lead.objects.all()
     context_object_name = "contactos"
 
 class leadDetailView(DetailView):
-    template_name="mainapp/lead_detail.html"
+    template_name="leads/lead_detail.html"
     queryset = Lead.objects.all()
     context_object_name = "contacto"
 
 class leadCreatelView(CreateView):
-    template_name="mainapp/lead_create.html"
+    template_name="leads/lead_create.html"
     form_class = LeadModelForm
     def get_success_url(self):
         return reverse("lead_list")
 
 class leadUpdatelView(UpdateView):
-    template_name="mainapp/lead_update.html"
+    template_name="leads/lead_update.html"
     queryset = Lead.objects.all()
     form_class = LeadModelForm
     context_object_name = "contacto"
@@ -33,7 +33,7 @@ class leadUpdatelView(UpdateView):
         return reverse("lead_list")
     
 class leadDeletelView(DeleteView):
-    template_name="mainapp/lead_delete.html"
+    template_name="leads/lead_delete.html"
     queryset = Lead.objects.all()
     context_object_name = "contacto"
     def get_success_url(self):
@@ -43,25 +43,25 @@ class leadDeletelView(DeleteView):
 
 # --- VIEWS PARA EMPRESAS ---
 class empresaListView(ListView):
-    template_name="mainapp/empresa_list.html"
+    template_name="empresas/empresa_list.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresas"
 
 
 class empresaDetailView(DetailView):
-    template_name="mainapp/empresa_detail.html"
+    template_name="empresas/empresa_detail.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresa"
 
 
 class empresaCreatelView(CreateView):
-    template_name="mainapp/empresa_create.html"
+    template_name="empresas/empresa_create.html"
     form_class = EmpresaModelForm
     def get_success_url(self):
         return reverse("empresa_list")
 
 class empresaUpdatelView(UpdateView):
-    template_name="mainapp/empresa_update.html"
+    template_name="empresas/empresa_update.html"
     queryset = Empresa.objects.all()
     form_class = EmpresaModelForm
     context_object_name = "empresa"
@@ -69,7 +69,7 @@ class empresaUpdatelView(UpdateView):
         return reverse("empresa_list")
 
 class empresaDeletelView(DeleteView):
-    template_name="mainapp/empresa_delete.html"
+    template_name="empresas/empresa_delete.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresa"
     def get_success_url(self):
