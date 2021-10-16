@@ -16,12 +16,18 @@
     </div>
 </div>
 <br/>
-<a class="backbtn" href="{% url 'empresa_create' %}"><button>Agregar</button></a>
-<br/><br/>
-{% for empresa in empresas %}
-    <div class="list_content">
-        <a href="{% url 'empresa_detail' empresa.pk %}">{{ empresa.nombre }} {{ empresa.telefono }}</a>
-    </div>
-{% endfor %}
-    
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="submitbtn" href="{% url 'empresa_create' %}"><button>Agregar</button></a>
+</div>
+<br/>
+<div class="list_container">
+    {% for empresa in empresas %}
+        <div class="list_content">
+        <p>{{ empresa.nombre }}<br/>
+        {{ empresa.telefono }}<br/><br/>
+            <a class="detail_href" href="{% url 'empresa_detail' empresa.pk %}">Más info.</a>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

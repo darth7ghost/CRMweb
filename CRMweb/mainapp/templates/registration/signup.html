@@ -1,0 +1,31 @@
+{% extends 'layouts/layouts.html'%}
+{% load static %}
+
+{% block title %}Regístrate {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <img src="{% static 'images/imgheader.svg'%}"/>
+        <h1 class="title">Regístrate </h1>
+            <div class="time">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Contenido de la pagina del indice.-->
+<div class="logContent">
+    <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="submitbtn" type="submit">Regístrate</button>
+    </form>
+</div>
+
+<div id="waveindex">
+    <img src="{% static 'images/imgindex.svg'%}"/>
+</div>
+
+{% endblock %}

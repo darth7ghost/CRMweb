@@ -2,11 +2,18 @@ from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Empresa, Lead, Agent
-from .forms import LeadForm, LeadModelForm, EmpresaModelForm
+from .forms import LeadModelForm, EmpresaModelForm, CustomUserCreationForm
 
 #CRUD - Create, Retrieve, Update, Delete + List
 class indexView(TemplateView):
     template_name="mainapp/index.html"
+
+class signUpView(CreateView):
+    template_name="registration/signup.html"
+    form_class = CustomUserCreationForm
+    def get_success_url(self):
+        print("usuario creado")
+        return reverse("login")
 
 # --- VIEWS PARA CONTACTOS ---
 class leadListView(ListView):

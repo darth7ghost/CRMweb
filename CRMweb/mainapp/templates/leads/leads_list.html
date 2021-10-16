@@ -16,12 +16,18 @@
     </div>
 </div>
 <br/>
-<a class="backbtn" href="{% url 'lead_create' %}"><button>Agregar</button></a>
-<br/><br/>
-{% for contacto in contactos %}
-    <div class="list_content">
-        <a href="{% url 'lead_detail' contacto.pk %}">{{ contacto.nombres }} {{ contacto.apellidos }} - {{ contacto.email }}</a>
-    </div>
-{% endfor %}
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="submitbtn" href="{% url 'lead_create' %}"><button>Agregar</button></a>
+</div>
+<br/>
+<div class="list_container">
+    {% for contacto in contactos %}
+        <div class="list_content">
+            <p>{{ contacto.nombres }} {{ contacto.apellidos }}<br/>
+            - {{ contacto.email }}</p><br/>
+            <a class="detail_href" href="{% url 'lead_detail' contacto.pk %}">Ve al contacto</a>
+        </div>
+    {% endfor %}
+</div>
     
 {% endblock %}
