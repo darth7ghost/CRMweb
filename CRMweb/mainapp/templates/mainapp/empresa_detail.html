@@ -7,7 +7,7 @@
 
 <div class="start">
     <div class="initial">
-        <h1>Detalles de {{ empresas.nombre }}</h1>
+        <h1>Detalles de {{ empresa.nombre }}</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -16,26 +16,26 @@
 </div>
 <div class="content">
     <div class="box">
-        <p>Nombre: {{ empresas.nombre }}
+        <p>Nombre: {{ empresa.nombre }}
         <br/>
-        Teléfono: {{ empresas.telefono }}
+        Teléfono: {{ empresa.telefono }}
         <br/>
-        Website: {{ empresas.website }}
+        Website: {{ empresa.website }}
         <br/>
-        Descripción: {{ empresas.descripcion }}
+        Descripción: {{ empresa.descripcion }}
         <br/>
-        Calle de facturación: {{ empresas.calleFacturacion }}
+        Calle de facturación: {{ empresa.calleFacturacion }}
         <br/>
-        Ciudad de facturación: {{ empresas.ciudadFacturacion }}
+        Ciudad de facturación: {{ empresa.ciudadFacturacion }}
         <br/>
-        Estado de facturación: {{ empresas.estadoFacturacion }}
+        Estado de facturación: {{ empresa.estadoFacturacion }}
         <br/>
-        País de facturación: {{ empresas.paisFacturacion }}
+        País de facturación: {{ empresa.paisFacturacion }}
         <br/>
-        Código de facturación: {{ empresas.codigoFacturacion }}
+        Código de facturación: {{ empresa.codigoFacturacion }}
         <br/><br/></p>
-        <a class="submitbtn" href="{% url 'empresa_update' empresas.pk %}"><button>Editar</button></a>
-        <a class="delbtn" href="{% url 'empresa_delete' empresas.pk %}"><button>Eliminar</button></a>
+        <a class="submitbtn" href="{% url 'empresa_update' empresa.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'empresa_delete' empresa.pk %}"><button>Eliminar</button></a>
     </div>
     <a class="backbtn" href="{% url 'empresa_list' %}"><button>Regresar</button></a>
 </div>
