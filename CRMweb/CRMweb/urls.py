@@ -1,7 +1,8 @@
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path
+from django.conf import settings
 from mainapp.views import (
-    lead_detail, lead_list, lead_create, lead_update, lead_delete, empresa_list, empresa_detail,
     indexView, leadListView, empresaListView, leadDetailView, empresaDetailView, leadCreatelView,
     empresaCreatelView, leadUpdatelView, empresaUpdatelView, leadDeletelView, empresaDeletelView
 )
@@ -24,3 +25,6 @@ urlpatterns = [
     path('empresas/<int:pk>/editarempresa', empresaUpdatelView.as_view(), name="empresa_update"),
     path('empresas/<int:pk>/eliminarempresa', empresaDeletelView.as_view(), name="empresa_delete")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
