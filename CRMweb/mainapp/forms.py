@@ -2,7 +2,7 @@ from django import forms
 from django.forms import fields
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from .models import Lead, Empresa, Producto
+from .models import Lead, Empresa, Producto, Tarea, Evento
 
 User = get_user_model()
 
@@ -54,6 +54,34 @@ class ProductoModelForm(forms.ModelForm):
             'activo'
         )
 
+class TareaModelForm(forms.ModelForm):
+    class Meta:
+        model = Tarea
+        fields = (
+            'nombre',
+            'fechaVencimiento',
+            'repetir',
+            'relacionado',
+            'descripcion',
+            'prioridad'
+        )
+
+class EventoModelForm(forms.ModelForm):
+    class Meta:
+        model = Evento
+        fields = (
+            'titulo',
+            'de',
+            'para',
+            'repetir',
+            'ubicacion',
+            'relacionado',
+            'descripcion'
+        )
+
+
+
+# --- FORM OBSOLETO ---
 class LeadForm(forms.Form):
     nombres = forms.CharField()
     apellidos = forms.CharField()

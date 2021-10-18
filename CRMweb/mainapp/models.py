@@ -43,3 +43,22 @@ class Producto(models.Model):
     precio = models.FloatField()
     descripcion = models.CharField(max_length=200)
     activo = models.BooleanField()
+
+class Tarea(models.Model):
+    nombre = models.CharField(max_length=45)
+    fechaVencimiento = models.DateField()
+    repetir = models.BooleanField()
+    relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    descripcion = models.CharField(max_length=200)
+    prioridad = models.BooleanField()
+
+class Evento(models.Model):
+    titulo = models.CharField(max_length=45)
+    de = models.ForeignKey("Empresa", on_delete=models.CASCADE)
+    para = models.ForeignKey("Lead", on_delete=models.CASCADE)
+    repetir = models.BooleanField()
+    ubicacion = models.CharField(max_length=45)
+    relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    descripcion = models.CharField(max_length=200)
+
+    

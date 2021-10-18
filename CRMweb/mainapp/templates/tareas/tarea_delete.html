@@ -1,0 +1,29 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Tareas {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>¿Deseas eliminar esta tarea?</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="box">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="delbtn" type="submit">Eliminar</button> 
+            <a class="backbtn" href="{% url 'tarea_list' %}"><button>Regersar</button></a>   
+        </form>
+    </div>
+    
+</div>
+
+{% endblock %}

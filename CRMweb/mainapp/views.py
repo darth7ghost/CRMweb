@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Empresa, Lead, Agent, Producto
-from .forms import LeadModelForm, EmpresaModelForm, CustomUserCreationForm, ProductoModelForm
+from .models import Empresa, Lead, Agent, Producto, Tarea, Evento
+from .forms import (
+    LeadModelForm, EmpresaModelForm, CustomUserCreationForm, ProductoModelForm, TareaModelForm,
+    EventoModelForm
+)
 
 #CRUD - Create, Retrieve, Update, Delete + List
 class indexView(TemplateView):
@@ -114,7 +117,7 @@ class productoCreatelView(CreateView):
         return reverse("producto_list")
 
 class productoUpdatelView(UpdateView):
-    template_name="productos/empresa_update.html"
+    template_name="productos/producto_update.html"
     queryset = Producto.objects.all()
     form_class = ProductoModelForm
     context_object_name = "producto"
@@ -126,11 +129,43 @@ class productoDeletelView(DeleteView):
     queryset = Producto.objects.all()
     context_object_name = "producto"
     def get_success_url(self):
-        return reverse("eproducto_list")
+        return reverse("producto_list")
 
 
 
+# --- VIEWS PARA TAREAS ---
+class tareaListView(ListView):
+    template_name="tareas/tarea_list.html"
+    queryset = Tarea.objects.all()
+    context_object_name = "tareas"
 
+
+class tareaDetailView(DetailView):
+    template_name="tareas/tarea_detail.html"
+    queryset = Tarea.objects.all()
+    context_object_name = "tarea"
+
+
+class tareaCreatelView(CreateView):
+    template_name="tareas/tarea_create.html"
+    form_class = TareaModelForm
+    def get_success_url(self):
+        return reverse("tarea_list")
+
+class tareaUpdatelView(UpdateView):
+    template_name="tareas/tarea_update.html"
+    queryset = Tarea.objects.all()
+    form_class = TareaModelForm
+    context_object_name = "tarea"
+    def get_success_url(self):
+        return reverse("tarea_list")
+
+class tareaDeletelView(DeleteView):
+    template_name="tareas/tarea_delete.html"
+    queryset = Tarea.objects.all()
+    context_object_name = "tarea"
+    def get_success_url(self):
+        return reverse("tarea_list")
 
 
 

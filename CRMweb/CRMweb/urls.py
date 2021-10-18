@@ -7,7 +7,8 @@ from mainapp.views import (
     indexView, leadListView, empresaListView, leadDetailView, empresaDetailView, leadCreatelView,
     empresaCreatelView, leadUpdatelView, empresaUpdatelView, leadDeletelView, empresaDeletelView,
     signUpView, productoCreatelView, productoDeletelView, productoDetailView, productoListView,
-    productoUpdatelView
+    productoUpdatelView, tareaCreatelView, tareaDeletelView, tareaDetailView, tareaListView,
+    tareaUpdatelView
 )
 
 urlpatterns = [
@@ -35,6 +36,12 @@ urlpatterns = [
     path('productos/crearproducto/', productoCreatelView.as_view(), name='producto_create'),
     path('productos/<int:pk>/editarproducto', productoUpdatelView.as_view(), name="producto_update"),
     path('productos/<int:pk>/eliminarproducto', productoDeletelView.as_view(), name="producto_delete"),
+    # --- URLS PARA PRODUCTOS ---
+    path('tareas/', tareaListView.as_view(), name = 'tarea_list'),
+    path('tareas/<int:pk>/', tareaDetailView.as_view(), name="tarea_detail"),
+    path('tareas/creartarea/', tareaCreatelView.as_view(), name='tarea_create'),
+    path('tareas/<int:pk>/editartarea', tareaUpdatelView.as_view(), name="tarea_update"),
+    path('tareas/<int:pk>/eliminartarea', tareaDeletelView.as_view(), name="tarea_delete"),
 ]
 
 if settings.DEBUG:
