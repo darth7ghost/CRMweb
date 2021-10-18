@@ -1,25 +1,29 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Empresas {% endblock %}
+{% block title %}Eventos {% endblock %}
 
 {% block content %}
 {{ block.super }}
 
 <div class="start">
     <div class="initial">
-        <h1>¿Desea eliminar esta empresa?</h1>
+        <h1>Crea un nuevo evento</h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
         </div>
     </div>
 </div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="backbtn" href="{% url 'evento_list' %}"><button>Regresar</button></a>
+</div>
 <div class="content">
     <div class="box">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="delbtn" type="submit">Eliminar</button>
+            <button class="submitbtn" type="submit">Crear</button>    
         </form>
     </div>
 </div>

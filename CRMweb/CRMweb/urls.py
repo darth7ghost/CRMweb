@@ -8,7 +8,8 @@ from mainapp.views import (
     empresaCreatelView, leadUpdatelView, empresaUpdatelView, leadDeletelView, empresaDeletelView,
     signUpView, productoCreatelView, productoDeletelView, productoDetailView, productoListView,
     productoUpdatelView, tareaCreatelView, tareaDeletelView, tareaDetailView, tareaListView,
-    tareaUpdatelView
+    tareaUpdatelView, eventoCreatelView, eventoDeletelView, eventoDetailView, eventoListView,
+    eventoUpdatelView
 )
 
 urlpatterns = [
@@ -36,12 +37,18 @@ urlpatterns = [
     path('productos/crearproducto/', productoCreatelView.as_view(), name='producto_create'),
     path('productos/<int:pk>/editarproducto', productoUpdatelView.as_view(), name="producto_update"),
     path('productos/<int:pk>/eliminarproducto', productoDeletelView.as_view(), name="producto_delete"),
-    # --- URLS PARA PRODUCTOS ---
+    # --- URLS PARA TAREAS ---
     path('tareas/', tareaListView.as_view(), name = 'tarea_list'),
     path('tareas/<int:pk>/', tareaDetailView.as_view(), name="tarea_detail"),
     path('tareas/creartarea/', tareaCreatelView.as_view(), name='tarea_create'),
     path('tareas/<int:pk>/editartarea', tareaUpdatelView.as_view(), name="tarea_update"),
     path('tareas/<int:pk>/eliminartarea', tareaDeletelView.as_view(), name="tarea_delete"),
+    # --- URLS PARA EVENTOS  ---
+    path('eventos/', eventoListView.as_view(), name = 'evento_list'),
+    path('eventos/<int:pk>/', eventoDetailView.as_view(), name="evento_detail"),
+    path('eventos/crearevento/', eventoCreatelView.as_view(), name='evento_create'),
+    path('eventos/<int:pk>/editarevento', eventoUpdatelView.as_view(), name="evento_update"),
+    path('eventos/<int:pk>/eliminarevento', eventoDeletelView.as_view(), name="evento_delete"),
 ]
 
 if settings.DEBUG:

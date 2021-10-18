@@ -35,6 +35,9 @@ class Empresa(models.Model):
     estadoFacturacion = models.CharField(max_length=45)
     paisFacturacion = models.CharField(max_length=45)
     codigoFacturacion = models.CharField(max_length=45)
+    
+    def __str__(self):
+        return f'{self.nombre} {self.telefono}'
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=45)
@@ -43,6 +46,9 @@ class Producto(models.Model):
     precio = models.FloatField()
     descripcion = models.CharField(max_length=200)
     activo = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.codigo} {self.nombre}'
 
 class Tarea(models.Model):
     nombre = models.CharField(max_length=45)

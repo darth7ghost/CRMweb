@@ -11,12 +11,14 @@ from .forms import (
 class indexView(TemplateView):
     template_name="mainapp/index.html"
 
+
 class signUpView(CreateView):
     template_name="registration/signup.html"
     form_class = CustomUserCreationForm
     def get_success_url(self):
         print("usuario creado")
         return reverse("login")
+
 
 # --- VIEWS PARA CONTACTOS ---
 class leadListView(ListView):
@@ -166,6 +168,42 @@ class tareaDeletelView(DeleteView):
     context_object_name = "tarea"
     def get_success_url(self):
         return reverse("tarea_list")
+
+
+
+# --- VIEWS PARA EVENTOS ---
+class eventoListView(ListView):
+    template_name="eventos/evento_list.html"
+    queryset = Evento.objects.all()
+    context_object_name = "eventos"
+
+
+class eventoDetailView(DetailView):
+    template_name="eventos/evento_detail.html"
+    queryset = Evento.objects.all()
+    context_object_name = "evento"
+
+
+class eventoCreatelView(CreateView):
+    template_name="eventos/evento_create.html"
+    form_class = EventoModelForm
+    def get_success_url(self):
+        return reverse("evento_list")
+
+class eventoUpdatelView(UpdateView):
+    template_name="eventos/evento_update.html"
+    queryset = Evento.objects.all()
+    form_class = EventoModelForm
+    context_object_name = "evento"
+    def get_success_url(self):
+        return reverse("evento_list")
+
+class eventoDeletelView(DeleteView):
+    template_name="eventos/evento_delete.html"
+    queryset = Evento.objects.all()
+    context_object_name = "evento"
+    def get_success_url(self):
+        return reverse("evento_list")
 
 
 

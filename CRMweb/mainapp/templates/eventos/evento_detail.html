@@ -1,0 +1,42 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Eventos {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Detalles de {{ evento.titulo }}</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="backbtn" href="{% url 'evento_list' %}"><button>Regresar</button></a>
+</div>
+<div class="content">
+    <div class="box">
+        <p>Título: {{ evento.titulo }}
+        <br/>
+        De: {{ evento.de }}
+        <br/>
+        Para: {{ evento.para }}
+        <br/>
+        Repetir: {{ evento.repetir }}
+        <br/>
+        Ubicación: {{ evento.ubicacion }}
+        <br/>
+        Relacionado a: {{ evento.relacionado }}
+        <br/>
+        Descripcion: {{ evento.descripcion }}
+        <br/><br/></p>
+        <a class="submitbtn" href="{% url 'evento_update' evento.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'evento_delete' evento.pk %}"><button>Eliminar</button></a>
+    </div>
+</div>
+
+{% endblock %}

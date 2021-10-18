@@ -1,13 +1,13 @@
 {% extends 'layouts/layouts.html'%}
 
-{% block title %}Empresas {% endblock %}
+{% block title %}Eventos {% endblock %}
 
 {% block content %}
 {{ block.super }}
 
 <div class="start">
     <div class="initial">
-        <h1>Estas son todas las empresas asociadas: </h1>
+        <h1>Estas son todos los eventos: </h1>
             <div id="time">
                 {% now "Y - h:m"%}
             </div>
@@ -17,15 +17,15 @@
 </div>
 <br/>
 <div class="divbtn" style="margin-left: 40px;">
-    <a class="submitbtn" href="{% url 'empresa_create' %}"><button>Agregar</button></a>
+    <a class="submitbtn" href="{% url 'evento_create' %}"><button>Agregar</button></a>
 </div>
 <br/>
 <div class="list_container">
-    {% for empresa in empresas %}
+    {% for evento in eventos %}
         <div class="list_content">
-        <p>{{ empresa.nombre }}<br/>
-        {{ empresa.telefono }}<br/><br/>
-            <a class="detail_href" href="{% url 'empresa_detail' empresa.pk %}">Más info.</a>
+        <p>{{ evento.titulo }}<br/>
+        {{ evento.ubicacion }}<br/><br/>
+        <a class="detail_href" href="{% url 'evento_detail' evento.pk %}">Detalles</a>
         </div>
     {% endfor %}
 </div>

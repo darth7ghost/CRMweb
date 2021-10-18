@@ -14,6 +14,10 @@
         </div>
     </div>
 </div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="backbtn" href="{% url 'empresa_detail' empresa.pk %}"><button>Regresar</button></a>
+</div>
 <div class="content">
     <div class="box">
         <form method="post">
@@ -22,7 +26,6 @@
             <button class="submitbtn" type="submit">Actualizar</button>    
         </form>
     </div>
-    <a class="backbtn" href="{% url 'empresa_detail' empresa.pk %}"><button>Regersar</button></a>
 </div>
 
 {% endblock %}
