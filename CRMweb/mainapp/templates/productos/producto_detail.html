@@ -1,0 +1,40 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Productos {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Detalles de {{ producto.nombre }}</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="backbtn" href="{% url 'producto_list' %}"><button>Regresar</button></a>
+</div>
+<div class="content">
+    <div class="box">
+        <p>Nombre: {{ producto.nombre }}
+        <br/>
+        Código: {{ producto.codigo }}
+        <br/>
+        Categoría: {{ producto.categoria }}
+        <br/>
+        precio: {{ producto.precio }}
+        <br/>
+        Descripción: {{ producto.descripcion }}
+        <br/>
+        Activo: {{ producto.activo }}
+        <br/><br/></p>
+        <a class="submitbtn" href="{% url 'producto_update' producto.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'producto_delete' producto.pk %}"><button>Eliminar</button></a>
+    </div>
+</div>
+
+{% endblock %}

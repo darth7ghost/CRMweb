@@ -1,0 +1,33 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Productos {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Estos son todos los productos ofertados: </h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+        <p></p>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="submitbtn" href="{% url 'producto_create' %}"><button>Agregar</button></a>
+</div>
+<br/>
+<div class="list_container">
+    {% for producto in productos %}
+        <div class="list_content">
+            <p>{{ producto.nombre }}<br/>
+            - {{ producto.codigo }}</p><br/>
+            <a class="detail_href" href="{% url 'producto_detail' producto.pk %}">Detalles</a>
+        </div>
+    {% endfor %}
+</div>
+    
+{% endblock %}

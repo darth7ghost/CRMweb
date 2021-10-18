@@ -9,13 +9,13 @@
     <title>
         {% block title %}
         {% endblock %}
-        | CRM
+        | GTxCRM
     </title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
 </head>
 <body>
     <header>
-        <h1 id="h1header">Sistema CRM</h1>
+        <h1 id="h1header">GTxCRM</h1>
         <nav>
             <ul class="nav_links">
                 {% if not request.user.is_authenticated %}
@@ -23,8 +23,9 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li   li><a href="{% url 'lead_list' %}">Contactos</a></li>
+                    <li><a href="{% url 'lead_list' %}">Contactos</a></li>
                     <li><a href="{% url 'empresa_list' %}">Empresas</a></li>
+                    <li><a href="{% url 'producto_list' %}">Productos</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -43,7 +44,7 @@
 
     {% include 'layouts/scripts.html' %}
     <footer>
-        Sistema CRM &copy; Oscar Sierra
+        GTxCRM &copy; Oscar Sierra
     </footer>
 </body>
 </html>

@@ -6,7 +6,8 @@ from django.conf import settings
 from mainapp.views import (
     indexView, leadListView, empresaListView, leadDetailView, empresaDetailView, leadCreatelView,
     empresaCreatelView, leadUpdatelView, empresaUpdatelView, leadDeletelView, empresaDeletelView,
-    signUpView
+    signUpView, productoCreatelView, productoDeletelView, productoDetailView, productoListView,
+    productoUpdatelView
 )
 
 urlpatterns = [
@@ -28,6 +29,12 @@ urlpatterns = [
     path('empresas/crearempresa/', empresaCreatelView.as_view(), name='empresa_create'),
     path('empresas/<int:pk>/editarempresa', empresaUpdatelView.as_view(), name="empresa_update"),
     path('empresas/<int:pk>/eliminarempresa', empresaDeletelView.as_view(), name="empresa_delete"),
+    # --- URLS PARA PRODUCTOS ---
+    path('productos/', productoListView.as_view(), name = 'producto_list'),
+    path('productos/<int:pk>/', productoDetailView.as_view(), name="producto_detail"),
+    path('productos/crearproducto/', productoCreatelView.as_view(), name='producto_create'),
+    path('productos/<int:pk>/editarproducto', productoUpdatelView.as_view(), name="producto_update"),
+    path('productos/<int:pk>/eliminarproducto', productoDeletelView.as_view(), name="producto_delete"),
 ]
 
 if settings.DEBUG:

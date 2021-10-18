@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Empresa, Lead, Agent
-from .forms import LeadModelForm, EmpresaModelForm, CustomUserCreationForm
+from .models import Empresa, Lead, Agent, Producto
+from .forms import LeadModelForm, EmpresaModelForm, CustomUserCreationForm, ProductoModelForm
 
 #CRUD - Create, Retrieve, Update, Delete + List
 class indexView(TemplateView):
@@ -91,6 +91,46 @@ class empresaDeletelView(DeleteView):
     context_object_name = "empresa"
     def get_success_url(self):
         return reverse("empresa_list")
+
+
+
+# --- VIEWS PARA PRODUCTOS ---
+class productoListView(ListView):
+    template_name="productos/producto_list.html"
+    queryset = Producto.objects.all()
+    context_object_name = "productos"
+
+
+class productoDetailView(DetailView):
+    template_name="productos/producto_detail.html"
+    queryset = Producto.objects.all()
+    context_object_name = "producto"
+
+
+class productoCreatelView(CreateView):
+    template_name="productos/producto_create.html"
+    form_class = ProductoModelForm
+    def get_success_url(self):
+        return reverse("producto_list")
+
+class productoUpdatelView(UpdateView):
+    template_name="productos/empresa_update.html"
+    queryset = Producto.objects.all()
+    form_class = ProductoModelForm
+    context_object_name = "producto"
+    def get_success_url(self):
+        return reverse("producto_list")
+
+class productoDeletelView(DeleteView):
+    template_name="productos/producto_delete.html"
+    queryset = Producto.objects.all()
+    context_object_name = "producto"
+    def get_success_url(self):
+        return reverse("eproducto_list")
+
+
+
+
 
 
 

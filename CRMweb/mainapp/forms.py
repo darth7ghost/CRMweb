@@ -2,7 +2,7 @@ from django import forms
 from django.forms import fields
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from .models import Lead, Empresa
+from .models import Lead, Empresa, Producto
 
 User = get_user_model()
 
@@ -40,6 +40,18 @@ class EmpresaModelForm(forms.ModelForm):
             'estadoFacturacion',
             'paisFacturacion',
             'codigoFacturacion'
+        )
+    
+class ProductoModelForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = (
+            'nombre',
+            'codigo',
+            'categoria',
+            'precio',
+            'descripcion',
+            'activo'
         )
 
 class LeadForm(forms.Form):
