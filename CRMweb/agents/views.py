@@ -1,3 +1,4 @@
+from django.db import reset_queries
 from django.shortcuts import render, reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,7 +9,8 @@ from .forms import AgentModelForm
 class agentListView(LoginRequiredMixin, generic.ListView):
     template_name = "agents/agent_list.html"
     def get_queryset(self):
-        return Agent.objects.all()
+        organizacion = self.request.user.userprofile
+        return Agent.objects.filter(organizacion = organizacion)
 
 class agentCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "agents/agent_create.html"
@@ -26,14 +28,16 @@ class agentDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "agents/agent_detail.html"
     context_object_name = "agent"
     def get_queryset(self):
-        return Agent.objects.all()
+        organizacion = self.request.user.userprofile
+        return Agent.objects.filter(organizacion = organizacion)
 
 class agentUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "agents/agent_update.html"
     context_object_name = "agent"
     form_class = AgentModelForm
     def get_queryset(self):
-        return Agent.objects.all()
+        organizacion = self.request.user.userprofile
+        return Agent.objects.filter(organizacion = organizacion)
 
     def get_success_url(self):
         return reverse("agent_list")
@@ -42,7 +46,8 @@ class agentDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "agents/agent_delete.html"
     context_object_name = "agent"
     def get_queryset(self):
-        return Agent.objects.all()
+        organizacion = self.request.user.userprofile
+        return Agent.objects.filter(organizacion = organizacion)
 
     def get_success_url(self):
         return reverse("agent_list")
