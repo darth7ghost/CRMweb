@@ -11,6 +11,9 @@ from mainapp.views import (
     tareaUpdatelView, eventoCreatelView, eventoDeletelView, eventoDetailView, eventoListView,
     eventoUpdatelView
 )
+from agents.views import (
+    agentListView, agentCreateView, agentDetailView, agentUpdateView, agentDeleteView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -49,6 +52,13 @@ urlpatterns = [
     path('eventos/crearevento/', eventoCreatelView.as_view(), name='evento_create'),
     path('eventos/<int:pk>/editarevento', eventoUpdatelView.as_view(), name="evento_update"),
     path('eventos/<int:pk>/eliminarevento', eventoDeletelView.as_view(), name="evento_delete"),
+
+    # --- URLS PARA AGENTES ---
+    path('agentes/', agentListView.as_view(), name="agent_list"),
+    path('agentes/<int:pk>/', agentDetailView.as_view(), name="agent_detail"),
+    path('agentes/crearagentes/', agentCreateView.as_view(), name='agent_create'),
+    path('agentes/<int:pk>/editaragente', agentUpdateView.as_view(), name="agent_update"),
+    path('agentes/<int:pk>/eliminaragente', agentDeleteView.as_view(), name="agent_delete"),
 ]
 
 if settings.DEBUG:

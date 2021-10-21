@@ -1,0 +1,32 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Agentes {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Estos son todos nuestros agentes: </h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+        <p></p>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="submitbtn" href="{% url 'agent_create' %}"><button>Agregar</button></a>
+</div>
+<br/>
+<div class="list_container">
+    {% for agente in object_list %}
+        <div class="list_content">
+            <p>{{ agente.user.username }}</p><br/>
+            <a class="detail_href" href="{% url 'agent_detail' agente.pk %}">Detalles</a>
+        </div>
+    {% endfor %}
+</div>
+    
+{% endblock %}

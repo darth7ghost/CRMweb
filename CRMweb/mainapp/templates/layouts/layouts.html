@@ -23,9 +23,11 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'agent_list' %}">Agentes</a></li>
                     <li><a href="{% url 'lead_list' %}">Contactos</a></li>
                     <li><a href="{% url 'empresa_list' %}">Empresas</a></li>
                     <li><a href="{% url 'producto_list' %}">Productos</a></li>
+                    <li><a href="#">Deals</a></li>
                     <li><a href="{% url 'tarea_list' %}">Tareas</a></li>
                     <li><a href="{% url 'evento_list' %}">Eventos</a></li>
                 {% endif %}

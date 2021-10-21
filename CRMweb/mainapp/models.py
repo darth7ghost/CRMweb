@@ -30,7 +30,7 @@ class Agent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     def __str__(self):
-        return self.user.email
+        return self.user.username
 
 class Empresa(models.Model):
     nombre = models.CharField(max_length=45)
