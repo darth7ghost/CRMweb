@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Empresa, Lead, Agent, Producto, Tarea, Evento
 from .forms import (
@@ -21,17 +22,17 @@ class signUpView(CreateView):
 
 
 # --- VIEWS PARA CONTACTOS ---
-class leadListView(ListView):
+class leadListView(LoginRequiredMixin, ListView):
     template_name="leads/leads_list.html"
     queryset = Lead.objects.all()
     context_object_name = "contactos"
 
-class leadDetailView(DetailView):
+class leadDetailView(LoginRequiredMixin, DetailView):
     template_name="leads/lead_detail.html"
     queryset = Lead.objects.all()
     context_object_name = "contacto"
 
-class leadCreatelView(CreateView):
+class leadCreatelView(LoginRequiredMixin, CreateView):
     template_name="leads/lead_create.html"
     form_class = LeadModelForm
     def get_success_url(self):
@@ -46,7 +47,7 @@ class leadCreatelView(CreateView):
         )
         return super(leadCreatelView, self).form_valid(form)
 
-class leadUpdatelView(UpdateView):
+class leadUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="leads/lead_update.html"
     queryset = Lead.objects.all()
     form_class = LeadModelForm
@@ -54,7 +55,7 @@ class leadUpdatelView(UpdateView):
     def get_success_url(self):
         return reverse("lead_list")
     
-class leadDeletelView(DeleteView):
+class leadDeletelView(LoginRequiredMixin, DeleteView):
     template_name="leads/lead_delete.html"
     queryset = Lead.objects.all()
     context_object_name = "contacto"
@@ -64,25 +65,23 @@ class leadDeletelView(DeleteView):
 
 
 # --- VIEWS PARA EMPRESAS ---
-class empresaListView(ListView):
+class empresaListView(LoginRequiredMixin, ListView):
     template_name="empresas/empresa_list.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresas"
 
-
-class empresaDetailView(DetailView):
+class empresaDetailView(LoginRequiredMixin, DetailView):
     template_name="empresas/empresa_detail.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresa"
 
-
-class empresaCreatelView(CreateView):
+class empresaCreatelView(LoginRequiredMixin, CreateView):
     template_name="empresas/empresa_create.html"
     form_class = EmpresaModelForm
     def get_success_url(self):
         return reverse("empresa_list")
 
-class empresaUpdatelView(UpdateView):
+class empresaUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="empresas/empresa_update.html"
     queryset = Empresa.objects.all()
     form_class = EmpresaModelForm
@@ -90,7 +89,7 @@ class empresaUpdatelView(UpdateView):
     def get_success_url(self):
         return reverse("empresa_list")
 
-class empresaDeletelView(DeleteView):
+class empresaDeletelView(LoginRequiredMixin, DeleteView):
     template_name="empresas/empresa_delete.html"
     queryset = Empresa.objects.all()
     context_object_name = "empresa"
@@ -100,25 +99,23 @@ class empresaDeletelView(DeleteView):
 
 
 # --- VIEWS PARA PRODUCTOS ---
-class productoListView(ListView):
+class productoListView(LoginRequiredMixin, ListView):
     template_name="productos/producto_list.html"
     queryset = Producto.objects.all()
     context_object_name = "productos"
 
-
-class productoDetailView(DetailView):
+class productoDetailView(LoginRequiredMixin, DetailView):
     template_name="productos/producto_detail.html"
     queryset = Producto.objects.all()
     context_object_name = "producto"
 
-
-class productoCreatelView(CreateView):
+class productoCreatelView(LoginRequiredMixin, CreateView):
     template_name="productos/producto_create.html"
     form_class = ProductoModelForm
     def get_success_url(self):
         return reverse("producto_list")
 
-class productoUpdatelView(UpdateView):
+class productoUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="productos/producto_update.html"
     queryset = Producto.objects.all()
     form_class = ProductoModelForm
@@ -126,7 +123,7 @@ class productoUpdatelView(UpdateView):
     def get_success_url(self):
         return reverse("producto_list")
 
-class productoDeletelView(DeleteView):
+class productoDeletelView(LoginRequiredMixin, DeleteView):
     template_name="productos/producto_delete.html"
     queryset = Producto.objects.all()
     context_object_name = "producto"
@@ -136,25 +133,23 @@ class productoDeletelView(DeleteView):
 
 
 # --- VIEWS PARA TAREAS ---
-class tareaListView(ListView):
+class tareaListView(LoginRequiredMixin, ListView):
     template_name="tareas/tarea_list.html"
     queryset = Tarea.objects.all()
     context_object_name = "tareas"
 
-
-class tareaDetailView(DetailView):
+class tareaDetailView(LoginRequiredMixin, DetailView):
     template_name="tareas/tarea_detail.html"
     queryset = Tarea.objects.all()
     context_object_name = "tarea"
 
-
-class tareaCreatelView(CreateView):
+class tareaCreatelView(LoginRequiredMixin, CreateView):
     template_name="tareas/tarea_create.html"
     form_class = TareaModelForm
     def get_success_url(self):
         return reverse("tarea_list")
 
-class tareaUpdatelView(UpdateView):
+class tareaUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="tareas/tarea_update.html"
     queryset = Tarea.objects.all()
     form_class = TareaModelForm
@@ -162,7 +157,7 @@ class tareaUpdatelView(UpdateView):
     def get_success_url(self):
         return reverse("tarea_list")
 
-class tareaDeletelView(DeleteView):
+class tareaDeletelView(LoginRequiredMixin, DeleteView):
     template_name="tareas/tarea_delete.html"
     queryset = Tarea.objects.all()
     context_object_name = "tarea"
@@ -172,25 +167,23 @@ class tareaDeletelView(DeleteView):
 
 
 # --- VIEWS PARA EVENTOS ---
-class eventoListView(ListView):
+class eventoListView(LoginRequiredMixin, ListView):
     template_name="eventos/evento_list.html"
     queryset = Evento.objects.all()
     context_object_name = "eventos"
 
-
-class eventoDetailView(DetailView):
+class eventoDetailView(LoginRequiredMixin, DetailView):
     template_name="eventos/evento_detail.html"
     queryset = Evento.objects.all()
     context_object_name = "evento"
 
-
-class eventoCreatelView(CreateView):
+class eventoCreatelView(LoginRequiredMixin, CreateView):
     template_name="eventos/evento_create.html"
     form_class = EventoModelForm
     def get_success_url(self):
         return reverse("evento_list")
 
-class eventoUpdatelView(UpdateView):
+class eventoUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="eventos/evento_update.html"
     queryset = Evento.objects.all()
     form_class = EventoModelForm
@@ -198,7 +191,7 @@ class eventoUpdatelView(UpdateView):
     def get_success_url(self):
         return reverse("evento_list")
 
-class eventoDeletelView(DeleteView):
+class eventoDeletelView(LoginRequiredMixin, DeleteView):
     template_name="eventos/evento_delete.html"
     queryset = Evento.objects.all()
     context_object_name = "evento"
