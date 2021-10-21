@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    es_organizador = models.BooleanField(default=True)
+    es_agente = models.BooleanField(default=False)
 
 class userProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,7 +18,7 @@ class Lead(models.Model):
     apellidos = models.CharField(max_length=45)
     titulo = models.CharField(max_length=45)
     email = models.CharField(max_length=45)
-    compania = models.CharField(max_length=45)
+    empresa = models.ForeignKey("Empresa", on_delete=models.CASCADE)
     movil = models.CharField(max_length=20)
     telefono = models.CharField(max_length=45)
     descripcion = models.CharField(max_length=200)
@@ -42,9 +43,10 @@ class Empresa(models.Model):
     estadoFacturacion = models.CharField(max_length=45)
     paisFacturacion = models.CharField(max_length=45)
     codigoFacturacion = models.CharField(max_length=45)
+    agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.nombre} {self.telefono}'
+        return f'{self.nombre} - {self.telefono}'
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=45)
@@ -53,6 +55,7 @@ class Producto(models.Model):
     precio = models.FloatField()
     descripcion = models.CharField(max_length=200)
     activo = models.BooleanField()
+    agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.codigo} {self.nombre}'

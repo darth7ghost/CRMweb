@@ -31,6 +31,8 @@
         Descripción: {{ producto.descripcion }}
         <br/>
         Activo: {{ producto.activo }}
+        <br/>
+        Agente encargado: {{ producto.agente }}
         <br/><br/></p>
         <a class="submitbtn" href="{% url 'producto_update' producto.pk %}"><button>Editar</button></a>
         <a class="delbtn" href="{% url 'producto_delete' producto.pk %}"><button>Eliminar</button></a>

@@ -23,7 +23,9 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'agent_list' %}">Agentes</a></li>
+                    {% if request.user.es_organizador %}
+                        <li><a href="{% url 'agent_list' %}">Agentes</a></li>
+                    {% endif %}
                     <li><a href="{% url 'lead_list' %}">Contactos</a></li>
                     <li><a href="{% url 'empresa_list' %}">Empresas</a></li>
                     <li><a href="{% url 'producto_list' %}">Productos</a></li>

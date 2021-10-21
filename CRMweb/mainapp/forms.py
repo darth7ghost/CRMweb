@@ -20,7 +20,7 @@ class LeadModelForm(forms.ModelForm):
             'apellidos',
             'titulo',
             'email',
-            'compania',
+            'empresa',
             'movil',
             'telefono',
             'descripcion',
@@ -39,7 +39,8 @@ class EmpresaModelForm(forms.ModelForm):
             'ciudadFacturacion',
             'estadoFacturacion',
             'paisFacturacion',
-            'codigoFacturacion'
+            'codigoFacturacion',
+            'agente'
         )
     
 class ProductoModelForm(forms.ModelForm):
@@ -51,7 +52,8 @@ class ProductoModelForm(forms.ModelForm):
             'categoria',
             'precio',
             'descripcion',
-            'activo'
+            'activo',
+            'agente'
         )
 
 class TareaModelForm(forms.ModelForm):

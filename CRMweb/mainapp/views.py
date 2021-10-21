@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Empresa, Lead, Agent, Producto, Tarea, Evento
+from .models import Empresa, Lead, Producto, Tarea, Evento
 from .forms import (
     LeadModelForm, EmpresaModelForm, CustomUserCreationForm, ProductoModelForm, TareaModelForm,
     EventoModelForm

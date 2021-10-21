@@ -37,6 +37,8 @@
         País de facturación: {{ empresa.paisFacturacion }}
         <br/>
         Código de facturación: {{ empresa.codigoFacturacion }}
+        <br/>
+        Agente encargado: {{ empresa.agente }}
         <br/><br/></p>
         <a class="submitbtn" href="{% url 'empresa_update' empresa.pk %}"><button>Editar</button></a>
         <a class="delbtn" href="{% url 'empresa_delete' empresa.pk %}"><button>Eliminar</button></a>
