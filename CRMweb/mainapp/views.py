@@ -24,13 +24,28 @@ class signUpView(CreateView):
 # --- VIEWS PARA CONTACTOS ---
 class leadListView(LoginRequiredMixin, ListView):
     template_name="leads/leads_list.html"
-    queryset = Lead.objects.all()
     context_object_name = "contactos"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Lead.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
 
 class leadDetailView(LoginRequiredMixin, DetailView):
     template_name="leads/lead_detail.html"
-    queryset = Lead.objects.all()
     context_object_name = "contacto"
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Lead.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
 
 class leadCreatelView(LoginRequiredMixin, CreateView):
     template_name="leads/lead_create.html"

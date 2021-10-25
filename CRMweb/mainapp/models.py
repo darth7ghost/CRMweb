@@ -22,7 +22,8 @@ class Lead(models.Model):
     movil = models.CharField(max_length=20)
     telefono = models.CharField(max_length=45)
     descripcion = models.CharField(max_length=200)
-    agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+    agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.nombres} {self.apellidos}'
@@ -43,7 +44,7 @@ class Empresa(models.Model):
     estadoFacturacion = models.CharField(max_length=45)
     paisFacturacion = models.CharField(max_length=45)
     codigoFacturacion = models.CharField(max_length=45)
-    agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     
     def __str__(self):
         return f'{self.nombre} - {self.telefono}'
@@ -55,7 +56,7 @@ class Producto(models.Model):
     precio = models.FloatField()
     descripcion = models.CharField(max_length=200)
     activo = models.BooleanField()
-    agente = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.codigo} {self.nombre}'
