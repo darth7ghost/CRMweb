@@ -29,5 +29,18 @@
         </div>
     {% endfor %}
 </div>
-
+{% if empresas_noasignadas.exists %}
+<div class="divbtn" style="margin-left: 40px;">
+    <h2>Empresas no asignadas: </h2>
+</div>
+    <div class="list_container">
+        {% for empresa in empresas_noasignadas %}
+            <div class="list_content">
+            <p>{{ empresa.nombre }}<br/>
+            {{ empresa.telefono }}<br/><br/>
+                <a class="detail_href" href="{% url 'empresa_detail' empresa.pk %}">Más info.</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}

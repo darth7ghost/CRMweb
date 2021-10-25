@@ -29,15 +29,34 @@ class leadListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         if user.es_organizador:
-            queryset = Lead.objects.filter(organizacion=user.userprofile)
+            queryset = Lead.objects.filter(
+                organizacion=user.userprofile,
+                agente__isnull=False
+            )
         else:
-            queryset = Lead.objects.filter(organizacion=user.agent.organizacion)
+            queryset = Lead.objects.filter(
+                organizacion=user.agent.organizacion,
+                agente__isnull=False
+            )
             queryset = queryset.filter(agente__user=user)
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(leadListView, self).get_context_data(**kwargs)
+        queryset = Lead.objects.filter(
+            organizacion=user.userprofile,
+            agente__isnull=True
+        )
+        context.update({
+            "leads_noasignados": queryset
+        })
+        return context
 
 class leadDetailView(LoginRequiredMixin, DetailView):
     template_name="leads/lead_detail.html"
     context_object_name = "contacto"
+
     def get_queryset(self):
         user = self.request.user
         if user.es_organizador:
@@ -50,10 +69,15 @@ class leadDetailView(LoginRequiredMixin, DetailView):
 class leadCreatelView(LoginRequiredMixin, CreateView):
     template_name="leads/lead_create.html"
     form_class = LeadModelForm
+
     def get_success_url(self):
         return reverse("lead_list")
+
     # --- ENVIANDO EMAILS ---
     def form_valid(self, form):
+        lead = form.save(commit=False)
+        lead.organizacion = self.request.user.userprofile
+        lead.save()
         send_mail(
             subject="¡Un nuevo contacto ha sido creado!",
             message="Ve al sitio CRMIPC2 para ver al nuevo contacto",
@@ -64,16 +88,34 @@ class leadCreatelView(LoginRequiredMixin, CreateView):
 
 class leadUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="leads/lead_update.html"
-    queryset = Lead.objects.all()
     form_class = LeadModelForm
     context_object_name = "contacto"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Lead.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("lead_list")
     
 class leadDeletelView(LoginRequiredMixin, DeleteView):
     template_name="leads/lead_delete.html"
-    queryset = Lead.objects.all()
     context_object_name = "contacto"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Lead.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("lead_list")
 
@@ -82,32 +124,91 @@ class leadDeletelView(LoginRequiredMixin, DeleteView):
 # --- VIEWS PARA EMPRESAS ---
 class empresaListView(LoginRequiredMixin, ListView):
     template_name="empresas/empresa_list.html"
-    queryset = Empresa.objects.all()
     context_object_name = "empresas"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Empresa.objects.filter(
+                organizacion=user.agent.organizacion,
+                agente__isnull=False
+            )
+        else:
+            queryset = Empresa.objects.filter(
+                organizacion=user.agent.organizacion,
+                agente__isnull=False
+            )
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(empresaListView, self).get_context_data(**kwargs)
+        queryset = Empresa.objects.filter(
+            organizacion=user.userprofile,
+            agente__isnull=True
+        )
+        context.update({
+            "empresas_noasignadas": queryset
+        })
+        return context
 
 class empresaDetailView(LoginRequiredMixin, DetailView):
     template_name="empresas/empresa_detail.html"
-    queryset = Empresa.objects.all()
     context_object_name = "empresa"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Empresa.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Empresa.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
 
 class empresaCreatelView(LoginRequiredMixin, CreateView):
     template_name="empresas/empresa_create.html"
     form_class = EmpresaModelForm
+
     def get_success_url(self):
         return reverse("empresa_list")
 
+    def form_valid(self, form):
+        empresa = form.save(commit=False)
+        empresa.organizacion = self.request.user.userprofile
+        empresa.save()
+        return super(empresaCreatelView, self).form_valid(form)
+
 class empresaUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="empresas/empresa_update.html"
-    queryset = Empresa.objects.all()
     form_class = EmpresaModelForm
     context_object_name = "empresa"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Empresa.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Empresa.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("empresa_list")
 
 class empresaDeletelView(LoginRequiredMixin, DeleteView):
     template_name="empresas/empresa_delete.html"
-    queryset = Empresa.objects.all()
     context_object_name = "empresa"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Empresa.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Empresa.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("empresa_list")
 
@@ -116,32 +217,91 @@ class empresaDeletelView(LoginRequiredMixin, DeleteView):
 # --- VIEWS PARA PRODUCTOS ---
 class productoListView(LoginRequiredMixin, ListView):
     template_name="productos/producto_list.html"
-    queryset = Producto.objects.all()
     context_object_name = "productos"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Producto.objects.filter(
+                organizacion=user.agent.organizacion,
+                agente__isnull=False
+            )
+        else:
+            queryset = Producto.objects.filter(
+                organizacion=user.agent.organizacion,
+                agente__isnull=False
+            )
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(productoListView, self).get_context_data(**kwargs)
+        queryset = Producto.objects.filter(
+            organizacion=user.userprofile,
+            agente__isnull=True
+        )
+        context.update({
+            "productos_noasignados": queryset
+        })
+        return context
 
 class productoDetailView(LoginRequiredMixin, DetailView):
     template_name="productos/producto_detail.html"
-    queryset = Producto.objects.all()
     context_object_name = "producto"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Producto.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Producto.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
 
 class productoCreatelView(LoginRequiredMixin, CreateView):
     template_name="productos/producto_create.html"
     form_class = ProductoModelForm
+
     def get_success_url(self):
         return reverse("producto_list")
 
+    def form_valid(self, form):
+        producto = form.save(commit=False)
+        producto.organizacion = self.request.user.userprofile
+        producto.save()
+        return super(productoCreatelView, self).form_valid(form)
+
 class productoUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="productos/producto_update.html"
-    queryset = Producto.objects.all()
     form_class = ProductoModelForm
     context_object_name = "producto"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Producto.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Producto.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("producto_list")
 
 class productoDeletelView(LoginRequiredMixin, DeleteView):
     template_name="productos/producto_delete.html"
-    queryset = Producto.objects.all()
     context_object_name = "producto"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Producto.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Producto.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(agente__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("producto_list")
 
@@ -150,32 +310,73 @@ class productoDeletelView(LoginRequiredMixin, DeleteView):
 # --- VIEWS PARA TAREAS ---
 class tareaListView(LoginRequiredMixin, ListView):
     template_name="tareas/tarea_list.html"
-    queryset = Tarea.objects.all()
     context_object_name = "tareas"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Tarea.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Tarea.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
 
 class tareaDetailView(LoginRequiredMixin, DetailView):
     template_name="tareas/tarea_detail.html"
-    queryset = Tarea.objects.all()
     context_object_name = "tarea"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Tarea.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Tarea.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
 
 class tareaCreatelView(LoginRequiredMixin, CreateView):
     template_name="tareas/tarea_create.html"
     form_class = TareaModelForm
+    
     def get_success_url(self):
         return reverse("tarea_list")
 
+    def form_valid(self, form):
+        tarea = form.save(commit=False)
+        tarea.organizacion = self.request.user.userprofile
+        tarea.save()
+        return super(tareaCreatelView, self).form_valid(form)
+
 class tareaUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="tareas/tarea_update.html"
-    queryset = Tarea.objects.all()
     form_class = TareaModelForm
     context_object_name = "tarea"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Tarea.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Tarea.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("tarea_list")
 
 class tareaDeletelView(LoginRequiredMixin, DeleteView):
     template_name="tareas/tarea_delete.html"
-    queryset = Tarea.objects.all()
     context_object_name = "tarea"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Tarea.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Tarea.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("tarea_list")
 
@@ -184,32 +385,73 @@ class tareaDeletelView(LoginRequiredMixin, DeleteView):
 # --- VIEWS PARA EVENTOS ---
 class eventoListView(LoginRequiredMixin, ListView):
     template_name="eventos/evento_list.html"
-    queryset = Evento.objects.all()
     context_object_name = "eventos"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Evento.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Evento.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
 
 class eventoDetailView(LoginRequiredMixin, DetailView):
     template_name="eventos/evento_detail.html"
-    queryset = Evento.objects.all()
     context_object_name = "evento"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Evento.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Evento.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
 
 class eventoCreatelView(LoginRequiredMixin, CreateView):
     template_name="eventos/evento_create.html"
     form_class = EventoModelForm
+
     def get_success_url(self):
         return reverse("evento_list")
 
+    def form_valid(self, form):
+        evento = form.save(commit=False)
+        evento.organizacion = self.request.user.userprofile
+        evento.save()
+        return super(eventoCreatelView, self).form_valid(form)
+
 class eventoUpdatelView(LoginRequiredMixin, UpdateView):
     template_name="eventos/evento_update.html"
-    queryset = Evento.objects.all()
     form_class = EventoModelForm
     context_object_name = "evento"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Evento.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Evento.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("evento_list")
 
 class eventoDeletelView(LoginRequiredMixin, DeleteView):
     template_name="eventos/evento_delete.html"
-    queryset = Evento.objects.all()
     context_object_name = "evento"
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Evento.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Evento.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
+
     def get_success_url(self):
         return reverse("evento_list")
 

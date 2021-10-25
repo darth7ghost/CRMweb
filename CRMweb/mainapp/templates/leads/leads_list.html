@@ -29,5 +29,18 @@
         </div>
     {% endfor %}
 </div>
-    
+{% if leads_noasignados.exists %}
+<div class="divbtn" style="margin-left: 40px;">
+    <h2>Contactos no asignados: </h2>
+</div>
+    <div class="list_container">
+    {% for contacto in leads_noasignados %}
+        <div class="list_content">
+            <p>{{ contacto.nombres }} {{ contacto.apellidos }}<br/>
+            - {{ contacto.email }}</p><br/>
+            <a class="detail_href" href="{% url 'lead_detail' contacto.pk %}">Ve al contacto</a>
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
 {% endblock %}

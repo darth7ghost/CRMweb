@@ -29,5 +29,18 @@
         </div>
     {% endfor %}
 </div>
-    
+{% if productos_noasignados.exists %}
+<div class="divbtn" style="margin-left: 40px;">
+    <h2>Productos no asignados: </h2>
+</div>
+    <div class="list_container">
+        {% for producto in productos_noasignados %}
+            <div class="list_content">
+                <p>{{ producto.nombre }}<br/>
+                - {{ producto.codigo }}</p><br/>
+                <a class="detail_href" href="{% url 'producto_detail' producto.pk %}">Detalles</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}

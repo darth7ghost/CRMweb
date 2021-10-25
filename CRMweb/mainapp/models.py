@@ -44,6 +44,7 @@ class Empresa(models.Model):
     estadoFacturacion = models.CharField(max_length=45)
     paisFacturacion = models.CharField(max_length=45)
     codigoFacturacion = models.CharField(max_length=45)
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     
     def __str__(self):
@@ -56,6 +57,7 @@ class Producto(models.Model):
     precio = models.FloatField()
     descripcion = models.CharField(max_length=200)
     activo = models.BooleanField()
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -67,6 +69,7 @@ class Tarea(models.Model):
     repetir = models.BooleanField()
     relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
     descripcion = models.CharField(max_length=200)
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     prioridad = models.BooleanField()
 
 class Evento(models.Model):
@@ -76,6 +79,7 @@ class Evento(models.Model):
     repetir = models.BooleanField()
     ubicacion = models.CharField(max_length=45)
     relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     descripcion = models.CharField(max_length=200)
 
 def post_user_created_signal(sender, instance, created, **kwargs):
