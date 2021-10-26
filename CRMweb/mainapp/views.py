@@ -130,7 +130,7 @@ class empresaListView(LoginRequiredMixin, ListView):
         user = self.request.user
         if user.es_organizador:
             queryset = Empresa.objects.filter(
-                organizacion=user.agent.organizacion,
+                organizacion=user.userprofile,
                 agente__isnull=False
             )
         else:
@@ -223,7 +223,7 @@ class productoListView(LoginRequiredMixin, ListView):
         user = self.request.user
         if user.es_organizador:
             queryset = Producto.objects.filter(
-                organizacion=user.agent.organizacion,
+                organizacion=user.userprofile,
                 agente__isnull=False
             )
         else:
@@ -480,7 +480,6 @@ class dealDetailView(LoginRequiredMixin, DetailView):
             queryset = Deal.objects.filter(organizacion=user.userprofile)
         else:
             queryset = Deal.objects.filter(organizacion=user.agent.organizacion)
-            queryset = queryset.filter(relacionado__user=user)
         return queryset
 
 class dealCreatelView(LoginRequiredMixin, CreateView):
