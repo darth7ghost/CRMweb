@@ -1,0 +1,27 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Deals {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>¿Desea eliminar este deal?</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="box">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="delbtn" type="submit">Eliminar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

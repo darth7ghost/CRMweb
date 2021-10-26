@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Empresa, Lead, Producto, Tarea, Evento
+from .models import Empresa, Lead, Producto, Tarea, Evento, Deal
 from .forms import (
     LeadModelForm, EmpresaModelForm, CustomUserCreationForm, ProductoModelForm, TareaModelForm,
-    EventoModelForm
+    EventoModelForm, DealModelForm
 )
 
 #CRUD - Create, Retrieve, Update, Delete + List
@@ -457,6 +457,75 @@ class eventoDeletelView(LoginRequiredMixin, DeleteView):
 
 
 
+# --- VIEWS PARA DEALS ---
+class dealListView(LoginRequiredMixin, ListView):
+    template_name="deals/deal_list.html"
+    context_object_name = "deals"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Deal.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Deal.objects.filter(organizacion=user.agent.organizacion)
+        return queryset
+
+class dealDetailView(LoginRequiredMixin, DetailView):
+    template_name="deals/deal_detail.html"
+    context_object_name = "deal"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Deal.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Deal.objects.filter(organizacion=user.agent.organizacion)
+            queryset = queryset.filter(relacionado__user=user)
+        return queryset
+
+class dealCreatelView(LoginRequiredMixin, CreateView):
+    template_name="deals/deal_create.html"
+    form_class = DealModelForm
+
+    def get_success_url(self):
+        return reverse("deal_list")
+
+    def form_valid(self, form):
+        deal = form.save(commit=False)
+        deal.organizacion = self.request.user.userprofile
+        deal.save()
+        return super(dealCreatelView, self).form_valid(form)
+
+class dealUpdatelView(LoginRequiredMixin, UpdateView):
+    template_name="deals/deal_update.html"
+    form_class = DealModelForm
+    context_object_name = "deal"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Deal.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Deal.objects.filter(organizacion=user.agent.organizacion)
+        return queryset
+
+    def get_success_url(self):
+        return reverse("deal_list")
+
+class dealDeletelView(LoginRequiredMixin, DeleteView):
+    template_name="deals/deal_delete.html"
+    context_object_name = "deal"
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.es_organizador:
+            queryset = Deal.objects.filter(organizacion=user.userprofile)
+        else:
+            queryset = Deal.objects.filter(organizacion=user.agent.organizacion)
+        return queryset
+
+    def get_success_url(self):
+        return reverse("deal_list")
 
 
 

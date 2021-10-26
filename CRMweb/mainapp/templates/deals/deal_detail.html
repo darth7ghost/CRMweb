@@ -1,0 +1,44 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Deals {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Detalles de {{ deal.nombre }}</h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="backbtn" href="{% url 'deal_list' %}"><button>Regresar</button></a>
+</div>
+<div class="content">
+    <div class="box">
+        <p>Nomhre: {{ deal.nombre }}
+        <br/>
+        Contacto: {{ deal.contacto }}
+        <br/>
+        Empresa: {{ deal.empresa }}
+        <br/>
+        Estado: {{ deal.estado }}
+        <br/>
+        Monto: {{ deal.monto }}
+        <br/>
+        Fecha de cierre: {{ deal.fechaCierre }}
+        <br/>
+        Descripcion: {{ deal.descripcion }}
+        <br/>
+        Producto: {{ deal.producto }}
+        <br/><br/></p>
+        <a class="submitbtn" href="{% url 'deal_update' deal.pk %}"><button>Editar</button></a>
+        <a class="delbtn" href="{% url 'deal_delete' deal.pk %}"><button>Eliminar</button></a>
+    </div>
+</div>
+
+{% endblock %}

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import fields
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from .models import Lead, Empresa, Producto, Tarea, Evento
+from .models import Lead, Empresa, Producto, Tarea, Evento, Deal
 
 User = get_user_model()
 
@@ -81,6 +81,19 @@ class EventoModelForm(forms.ModelForm):
             'descripcion'
         )
 
+class DealModelForm(forms.ModelForm):
+    class Meta:
+        model = Deal
+        fields = (
+            'nombre',
+            'contacto',
+            'empresa',
+            'estado',
+            'monto',
+            'fechaCierre',
+            'descripcion',
+            'producto'
+        )
 
 
 # --- FORM OBSOLETO ---

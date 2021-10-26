@@ -1,0 +1,33 @@
+{% extends 'layouts/layouts.html'%}
+
+{% block title %}Deals {% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="start">
+    <div class="initial">
+        <h1>Estas son todos los deals: </h1>
+            <div id="time">
+                {% now "Y - h:m"%}
+            </div>
+        </div>
+        <p></p>
+    </div>
+</div>
+<br/>
+<div class="divbtn" style="margin-left: 40px;">
+    <a class="submitbtn" href="{% url 'deal_create' %}"><button>Agregar</button></a>
+</div>
+<br/>
+<div class="list_container">
+    {% for deal in deals %}
+        <div class="list_content">
+        <p>{{ deal.nombre }}<br/>
+        {{ deal.fechaCierre }}<br/><br/>
+        <a class="detail_href" href="{% url 'deal_detail' deal.pk %}">Detalles</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

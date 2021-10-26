@@ -9,7 +9,7 @@ from mainapp.views import (
     signUpView, productoCreatelView, productoDeletelView, productoDetailView, productoListView,
     productoUpdatelView, tareaCreatelView, tareaDeletelView, tareaDetailView, tareaListView,
     tareaUpdatelView, eventoCreatelView, eventoDeletelView, eventoDetailView, eventoListView,
-    eventoUpdatelView
+    eventoUpdatelView, dealCreatelView, dealDeletelView, dealDetailView, dealListView, dealUpdatelView
 )
 from agents.views import (
     agentListView, agentCreateView, agentDetailView, agentUpdateView, agentDeleteView
@@ -52,13 +52,19 @@ urlpatterns = [
     path('eventos/crearevento/', eventoCreatelView.as_view(), name='evento_create'),
     path('eventos/<int:pk>/editarevento', eventoUpdatelView.as_view(), name="evento_update"),
     path('eventos/<int:pk>/eliminarevento', eventoDeletelView.as_view(), name="evento_delete"),
+    # --- URLS PARA DEALS  ---
+    path('deals/', dealListView.as_view(), name = 'deal_list'),
+    path('deals/<int:pk>/', dealDetailView.as_view(), name="deal_detail"),
+    path('deals/creardeal/', dealCreatelView.as_view(), name='deal_create'),
+    path('deals/<int:pk>/editardeal', dealUpdatelView.as_view(), name="deal_update"),
+    path('deals/<int:pk>/eliminardeal', dealDeletelView.as_view(), name="deal_delete"),
 
     # --- URLS PARA AGENTES ---
     path('agentes/', agentListView.as_view(), name="agent_list"),
     path('agentes/<int:pk>/', agentDetailView.as_view(), name="agent_detail"),
     path('agentes/crearagentes/', agentCreateView.as_view(), name='agent_create'),
     path('agentes/<int:pk>/editaragente', agentUpdateView.as_view(), name="agent_update"),
-    path('agentes/<int:pk>/eliminaragente', agentDeleteView.as_view(), name="agent_delete"),
+    path('agentes/<int:pk>/eliminaragente', agentDeleteView.as_view(), name="agent_delete")
 ]
 
 if settings.DEBUG:

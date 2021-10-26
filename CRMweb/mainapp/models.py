@@ -21,7 +21,7 @@ class Lead(models.Model):
     empresa = models.ForeignKey("Empresa", on_delete=models.CASCADE)
     movil = models.CharField(max_length=20)
     telefono = models.CharField(max_length=45)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
     organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
 
@@ -38,7 +38,7 @@ class Empresa(models.Model):
     nombre = models.CharField(max_length=45)
     telefono = models.CharField(max_length=45)
     website = models.CharField(max_length=45)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
     calleFacturacion = models.CharField(max_length=45)
     ciudadFacturacion = models.CharField(max_length=45)
     estadoFacturacion = models.CharField(max_length=45)
@@ -55,7 +55,7 @@ class Producto(models.Model):
     codigo = models.IntegerField(default=0)
     categoria = models.CharField(max_length=45)
     precio = models.FloatField()
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
     activo = models.BooleanField()
     organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     agente = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
@@ -68,9 +68,12 @@ class Tarea(models.Model):
     fechaVencimiento = models.DateField()
     repetir = models.BooleanField()
     relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
     organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     prioridad = models.BooleanField()
+
+    def __str__(self):
+        return self.nombre
 
 class Evento(models.Model):
     titulo = models.CharField(max_length=45)
@@ -80,7 +83,30 @@ class Evento(models.Model):
     ubicacion = models.CharField(max_length=45)
     relacionado = models.ForeignKey("Agent", on_delete=models.CASCADE)
     organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.titulo
+
+class Deal(models.Model):
+    nombre = models.CharField(max_length=45)
+    contacto = models.ForeignKey("Lead", on_delete=models.CASCADE)
+    empresa = models.ForeignKey("Empresa", on_delete=models.CASCADE)
+    estado = models.ForeignKey("Estado", null=True, blank=True, on_delete=models.SET_NULL)
+    monto = models.FloatField()
+    fechaCierre = models.DateField()
+    descripcion = models.TextField()
+    producto = models.ForeignKey("Producto", on_delete=models.CASCADE)
+    organizacion = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
+
+class Estado(models.Model):
+    nombre = models.CharField(max_length=45)
+    
+    def __str__(self):
+        return self.nombre
 
 def post_user_created_signal(sender, instance, created, **kwargs):
     print(instance, created)
