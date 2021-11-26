@@ -76,25 +76,25 @@ WSGI_APPLICATION = 'CRMweb.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # --- SQLITE3 ---
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # --- POSTGRESQL ---
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gtxcrm',
-		'USER': 'postgres',
-		'PASSWORD': '1617',
-		'HOST': 'localhost',
-		'PORT': '5432'
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'gtxcrm',
+#		'USER': 'postgres',
+#		'PASSWORD': '1617',
+#		'HOST': 'localhost',
+#		'PORT': '5432'
+#    }
+#}
 
 
 # Password validation
