@@ -2,8 +2,8 @@
 Es un sistema CRM (Gestión de Relaciones con el Cliente) desarrollado para el curso de Introducción a la Computación y Programación II (IPC2).
 
 ## ¿Cómo hacerlo funcionar?
-Puedes usar la base de datos ´´´sqlite3´´´ que está ya en funcionamiento, o conectar directamente una base de datos que tengas en MYSQL o PostrgreSQL.
-También, para tener una base de datos completamente vacía y desde 0, puedes eliminar el archivo ´´´sqlite3´´´ y crear uno nuevo con el siguiente comando en la consola de tu IDE favorito o CMD/terminal.
+Puedes usar la base de datos __sqlite3__ que está ya en funcionamiento, o conectar directamente una base de datos que tengas en __MySQL__ o __PostrgreSQL__.
+También, para tener una base de datos completamente vacía y desde 0, puedes eliminar el archivo __sqlite3__ y crear uno nuevo con el siguiente comando en la consola de tu IDE favorito o CMD/terminal.
 > Debes primero acceder a la carpeta en donde está clonado el repositorio, para poder hacer uso de los comandos de Django.
 ```python
 # Crear migraciones a la base de datos:
