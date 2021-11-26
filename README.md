@@ -35,3 +35,7 @@ Cuando estés creando un agente, puedes dictarles un nombre de usuario, y un cor
 Una vez creados los agentes, todos los demás apartados quedarán disponibles para crear un entorno de negocios adaptado a tu empresa.
 
 ## ¿Cómo obtenerlo?
+Puedes obenerlo con el siguiente comando en la consola de tu IDE de preferencia:
+```bash
+gh repo clone darth7ghost/CRMweb
+```
