@@ -1,5 +1,5 @@
 # CRMweb
-Es un sistema CRM (Gestión de Relaciones con el Cliente) desarrollado para el curso de Introducción a la Computación y Programación II (IPC2).
+Es un sistema CRM (Gestión de Relaciones con el Cliente).
 
 ## ¿Cómo hacerlo funcionar?
 Puedes usar la base de datos __sqlite3__ que está ya en funcionamiento, o conectar directamente una base de datos que tengas en __MySQL__ o __PostrgreSQL__.
